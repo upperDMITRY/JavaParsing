@@ -1,0 +1,64 @@
+<company>
+    <department name="Development" depId="1">
+        <employee empId="001">
+            <lastName>Curchin</lastName>
+            <firstName>Dmitrii</firstName>
+            <birthDate>01.01.1900</birthDate>
+            <position>Department Lead</position>
+            <skills>
+                <skill>Communication</skill>
+                <skill>Java</skill>
+                <skill>Adaptable</skill>
+                <skill>Maven</skill>
+            </skills>
+            <managerId>0</managerId>
+        </employee>
+        <employee empId="002">
+            <lastName>Pirojkov</lastName>
+            <firstName>Artur</firstName>
+            <birthDate>08.12.1959</birthDate>
+            <position>Tester</position>
+            <skills>
+                <skill>Jenkins</skill>
+                <skill>Selenium</skill>
+                <skill>Java</skill>
+            </skills>
+            <managerId>001</managerId>
+        </employee>
+    </department>
+    <department name="Accounting" depId="2">
+        <employee empId="003">
+            <lastName>Bulochkin</lastName>
+            <firstName>Vasilii</firstName>
+            <birthDate>28.07.1960</birthDate>
+            <position>Accountant</position>
+            <skills>
+                <skill>Communication</skill>
+                <skill>Analytical mind</skill>
+            </skills>
+            <managerId>001</managerId>
+        </employee>
+        <employee empId="004">
+            <lastName>Petrov</lastName>
+            <firstName>Petr</firstName>
+            <birthDate>28.02.1989</birthDate>
+            <position>Assistant</position>
+            <skills>
+                <skill>Communication</skill>
+                <skill>Analytical mind</skill>
+            </skills>
+            <managerId>003</managerId>
+        </employee>
+        <employee empId="005">
+            <lastName>Bugur</lastName>
+            <firstName>Vasilisa</firstName>
+            <birthDate>28.10.2000</birthDate>
+            <position>Assistant</position>
+            <skills>
+                <skill>Communication</skill>
+                <skill>Analytical mind</skill>
+            </skills>
+            <managerId>003</managerId>
+        </employee>
+    </department>
+</company>
