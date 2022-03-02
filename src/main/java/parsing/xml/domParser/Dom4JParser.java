@@ -20,7 +20,7 @@ public class Dom4JParser {
 
             System.out.println("Root element :" + document.getRootElement().getName());
 
-            //Element classElement = document.getRootElement();
+            Element classElement = document.getRootElement();
 
             List<Node> nodes = document.selectNodes("/class/student");
             System.out.println("----------------------------");
