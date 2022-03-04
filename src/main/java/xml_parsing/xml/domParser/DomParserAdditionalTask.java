@@ -9,7 +9,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 
-public class DomParserTask3 {
+public class DomParserAdditionalTask {
     public static void main(String[] args) {
 
         try {
