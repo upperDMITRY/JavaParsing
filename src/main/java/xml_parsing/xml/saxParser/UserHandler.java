@@ -1,4 +1,4 @@
-package parsing.xml.saxParser;
+package xml_parsing.xml.saxParser;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;

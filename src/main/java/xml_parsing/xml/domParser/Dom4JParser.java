@@ -1,4 +1,4 @@
-package parsing.xml.domParser;
+package xml_parsing.xml.domParser;
 
 import java.io.File;
 import java.util.List;

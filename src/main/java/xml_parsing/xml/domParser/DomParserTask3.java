@@ -1,4 +1,4 @@
-package parsing.xml.domParser;
+package xml_parsing.xml.domParser;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;

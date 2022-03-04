@@ -1,36 +1,49 @@
-package parsing.xml.domParser;
+package xml_parsing.xml.XPathParser;
 
 import java.io.File;
+import java.io.IOException;
+
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
+import org.xml.sax.SAXException;
 
-public class DomParser {
+public class XPathParser {
 
     public static void main(String[] args) {
 
         try {
             File inputFile = new File("./dataForXMLParsing/input.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            DocumentBuilder dBuilder;
+
+            dBuilder = dbFactory.newDocumentBuilder();
+
             Document doc = dBuilder.parse(inputFile);
             doc.getDocumentElement().normalize();
-            System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
-            NodeList nList = doc.getElementsByTagName("student");
-            System.out.println("----------------------------");
 
-            for (int temp = 0; temp < nList.getLength(); temp++) {
-                Node nNode = nList.item(temp);
+            XPath xPath =  XPathFactory.newInstance().newXPath();
+
+            String expression = "/class/student";
+            NodeList nodeList = (NodeList) xPath.compile(expression).evaluate(
+                    doc, XPathConstants.NODESET);
+
+            for (int i = 0; i < nodeList.getLength(); i++) {
+                Node nNode = nodeList.item(i);
                 System.out.println("\nCurrent Element :" + nNode.getNodeName());
 
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element eElement = (Element) nNode;
-                    System.out.println("Student roll no : "
-                            + eElement.getAttribute("rollno"));
+                    System.out.println("Student roll no :" + eElement.getAttribute("rollno"));
                     System.out.println("First Name : "
                             + eElement
                             .getElementsByTagName("firstname")
@@ -53,7 +66,13 @@ public class DomParser {
                             .getTextContent());
                 }
             }
-        } catch (Exception e) {
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (XPathExpressionException e) {
             e.printStackTrace();
         }
     }

@@ -1,4 +1,4 @@
-package parsing.csv;
+package csv_parsing.csv;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -8,23 +8,20 @@ import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class CSVReaderWithHeaderAutoDetection {
-    private static final String SAMPLE_CSV_FILE_PATH = "./dataForCSVParsing/usersWithHeaders.csv";
+public class BasicCommonsCSVReader {
+    private static final String SAMPLE_CSV_FILE_PATH = "./dataForCSVParsing/commonsCSVWriter.csv";
 
     public static void main(String[] args) throws IOException {
         try (
                 Reader reader = Files.newBufferedReader(Paths.get(SAMPLE_CSV_FILE_PATH));
-                CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT
-                        .withFirstRecordAsHeader()
-                        .withIgnoreHeaderCase()
-                        .withTrim());
+                CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT);
         ) {
             for (CSVRecord csvRecord : csvParser) {
-                // Accessing values by Header names
-                String name = csvRecord.get("Name");
-                String email = csvRecord.get("Email");
-                String phone = csvRecord.get("Phone");
-                String country = csvRecord.get("Country");
+                // Accessing Values by Column Index
+                String name = csvRecord.get(0);
+                String email = csvRecord.get(1);
+                String phone = csvRecord.get(2);
+                String country = csvRecord.get(3);
 
                 System.out.println("Record No - " + csvRecord.getRecordNumber());
                 System.out.println("---------------");
@@ -36,5 +33,4 @@ public class CSVReaderWithHeaderAutoDetection {
             }
         }
     }
-
 }

@@ -1,4 +1,4 @@
-package parsing.csv;
+package csv_parsing.csv;
 
 import com.opencsv.CSVParser;
 import com.opencsv.CSVParserBuilder;

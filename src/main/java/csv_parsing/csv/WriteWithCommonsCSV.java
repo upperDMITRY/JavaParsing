@@ -1,4 +1,4 @@
-package parsing.csv;
+package csv_parsing.csv;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;

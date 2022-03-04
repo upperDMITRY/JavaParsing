@@ -1,4 +1,4 @@
-package parsing.xml.saxParser;
+package xml_parsing.xml.saxParser;
 
 import java.io.File;
 import javax.xml.parsers.SAXParser;
