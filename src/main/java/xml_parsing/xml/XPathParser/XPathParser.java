@@ -22,21 +22,32 @@ public class XPathParser {
     public static void main(String[] args) {
 
         try {
-            File inputFile = new File("./dataForXMLParsing/input.xml");
+            // создаем объект файла для считывания с указанием в конструкторе к нему пафа
+            File inputFile = new File("./dataForXMLParsing/inputXml.xml");
+            // просим factory создать нам новый истенс объекта DocumentBuilderFactory (factory pattern)
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder;
 
+            // создаем объекта на основе сконфигурированной dbFactory
+            // который превртит нам XML файл в объект document с которым мы будем работать
             dBuilder = dbFactory.newDocumentBuilder();
 
+            // парсим нам XML документ java Document
             Document doc = dBuilder.parse(inputFile);
+            // нормализируем ноды в документе, т.е выстраиваем данные поддерева
+            // под этим узлами с исключением пустых строк и так далее
             doc.getDocumentElement().normalize();
 
             XPath xPath =  XPathFactory.newInstance().newXPath();
 
+            //достаем все ноды которые содержатся в тегах <student>, в результате все храним в списке
             String expression = "/class/student";
             NodeList nodeList = (NodeList) xPath.compile(expression).evaluate(
                     doc, XPathConstants.NODESET);
 
+            // итерируемся по нодам, достаем каждую из них и кастим их к объекту Element
+            // который помогает нам взаимодействовать с информацией в ноде
+            // и после выводим информацию хранящююся в элементе, достаем значения по названию тэга
             for (int i = 0; i < nodeList.getLength(); i++) {
                 Node nNode = nodeList.item(i);
                 System.out.println("\nCurrent Element :" + nNode.getNodeName());

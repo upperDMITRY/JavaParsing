@@ -1,4 +1,4 @@
-package xml_parsing.xml.domParser;
+package xml_parsing.xml.additionalTasks;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -9,11 +9,11 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 
-public class DomParserAdditionalTask {
+public class JDomParserAdditionalTask {
     public static void main(String[] args) {
 
         try {
-            File inputFile = new File("./dataForXMLParsing/emp.xml");
+            File inputFile = new File("./dataForXMLParsing/companyXml.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(inputFile);

@@ -23,14 +23,20 @@ public class StAXParser {
 
         try {
             XMLInputFactory factory = XMLInputFactory.newInstance();
+            // считываем данные XML документа
             XMLEventReader eventReader =
-                    factory.createXMLEventReader(new FileReader("./dataForXMLParsing/input.xml"));
+                    factory.createXMLEventReader(new FileReader("./dataForXMLParsing/inputXml.xml"));
 
+            // проходим по данным пока они не закончатся
             while(eventReader.hasNext()) {
                 XMLEvent event = eventReader.nextEvent();
 
+                // смотрим что мы считали начала тега, его содержимое либо его конец
                 switch(event.getEventType()) {
 
+                    // если это начало объекта выводим его название и атрибуты,
+                    // если это филды объекта ставим значение в true там где мы
+                    // сейчас находимся (что сейчас считали)
                     case XMLStreamConstants.START_ELEMENT:
                         StartElement startElement = event.asStartElement();
                         String qName = startElement.getName().getLocalPart();
@@ -52,6 +58,8 @@ public class StAXParser {
                         }
                         break;
 
+                    // если мы считали данные тега, то просматриваем, какой филд у нас стоит
+                    // в true и выводим его данные и ставим его в false для следующего считывания
                     case XMLStreamConstants.CHARACTERS:
                         Characters characters = event.asCharacters();
                         if(bFirstName) {
@@ -72,6 +80,7 @@ public class StAXParser {
                         }
                         break;
 
+                        // если мы считали конец элемента тега, то выводим его
                     case XMLStreamConstants.END_ELEMENT:
                         EndElement endElement = event.asEndElement();
 

@@ -11,6 +11,9 @@ public class UserHandler extends DefaultHandler {
     boolean bNickName = false;
     boolean bMarks = false;
 
+    // выводим данные начала элементов, то есть открывающиеся теги и их атрибуты,
+    // если эти теги представляют собой поля объектов, то обозначаем что мы находимся
+    // на соответсвующем поле установив значение true к его параментру
     @Override
     public void startElement(String uri,
                              String localName, String qName, Attributes attributes) throws SAXException {
@@ -30,6 +33,7 @@ public class UserHandler extends DefaultHandler {
         }
     }
 
+    // считав конец элемента его закрытие тега, выводим что элемент был закрыт
     @Override
     public void endElement(String uri,
                            String localName, String qName) throws SAXException {
@@ -38,6 +42,8 @@ public class UserHandler extends DefaultHandler {
         }
     }
 
+    // когда мы считываем данные поля объекта с документа, прохоидимся по нашим переменным и смотрим
+    // какое из них значение стоит в true, значи те данные мы и считываем и выводим их
     @Override
     public void characters(char ch[], int start, int length) throws SAXException {
 

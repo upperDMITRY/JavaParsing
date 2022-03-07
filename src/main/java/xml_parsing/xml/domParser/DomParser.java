@@ -14,20 +14,32 @@ public class DomParser {
     public static void main(String[] args) {
 
         try {
-            File inputFile = new File("./dataForXMLParsing/input.xml");
+            // создаем объект файла для считывания с указанием в конструкторе к нему пафа
+            File inputFile = new File("./dataForXMLParsing/inputXml.xml");
+            // просим factory создать нам новый истенс объекта DocumentBuilderFactory (factory pattern)
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            // создаем объекта на основе сконфигурированной dbFactory
+            // который превртит нам XML файл в объект document с которым мы будем работать
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            // делаем из нашего файла XML -> document object
             Document doc = dBuilder.parse(inputFile);
+            // нормализируем ноды в документе, т.е выстраиваем данные поддерева
+            // под этим узлами с исключением пустых строк и так далее
             doc.getDocumentElement().normalize();
+            // выводим главный элемент то есть class
             System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
+            // достаем список элементов <student>
             NodeList nList = doc.getElementsByTagName("student");
             System.out.println("----------------------------");
 
+            // итерируемся по списку и выводим данные элементов и их атрибуты
             for (int temp = 0; temp < nList.getLength(); temp++) {
+                // достаем по одной ноде из списка и обращаемся к ее значениям
                 Node nNode = nList.item(temp);
                 System.out.println("\nCurrent Element :" + nNode.getNodeName());
 
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                    // кастим ноду в эелемент для того чтоб вывести с него данные о студенте
                     Element eElement = (Element) nNode;
                     System.out.println("Student roll no : "
                             + eElement.getAttribute("rollno"));

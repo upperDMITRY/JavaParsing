@@ -9,8 +9,12 @@ public class SaxParser {
     public static void main(String[] args) {
 
         try {
-            File inputFile = new File("./dataForXMLParsing/input.xml");
+            // создаем объект файла для считывания с указанием в конструкторе к нему пафа
+            File inputFile = new File("./dataForXMLParsing/inputXml.xml");
+            // просим factory создать нам новый истенс объекта SAXParserFactory (factory pattern)
             SAXParserFactory factory = SAXParserFactory.newInstance();
+            // создаем объект SAXParser (на основе сконфигурированной factory) который парсит наш XML файл и
+            // с помощью userHandler выводит данные
             SAXParser saxParser = factory.newSAXParser();
             UserHandler userhandler = new UserHandler();
             saxParser.parse(inputFile, userhandler);

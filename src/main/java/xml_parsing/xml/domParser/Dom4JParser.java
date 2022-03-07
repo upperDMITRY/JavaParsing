@@ -14,17 +14,24 @@ public class Dom4JParser {
     public static void main(String[] args) {
 
         try {
-            File inputFile = new File("./dataForXMLParsing/input.xml");
+            // создаем объект файла для считывания с указанием в конструкторе к нему пафа
+            File inputFile = new File("./dataForXMLParsing/inputXml.xml");
+            // создаем объект SAXReader который поможет нам считать xml данные с файла
             SAXReader reader = new SAXReader();
+            // считываем данные в объект document где они будут храниться
             Document document = reader.read(inputFile);
 
+            // выводим root element то есть нащ основной объект с которым мы работаем
             System.out.println("Root element :" + document.getRootElement().getName());
 
             Element classElement = document.getRootElement();
 
+            //достаем все ноды которые содержатся в тегах <student>, в результате все храним в списке
             List<Node> nodes = document.selectNodes("/class/student");
             System.out.println("----------------------------");
 
+            // итерируемся по полученным нодам и выводим их значения, в нашем случае выводим
+            // все данные из тегов <student> с его атрибутом
             for (Node node : nodes) {
                 System.out.println("\nCurrent Element :"
                         + node.getName());
