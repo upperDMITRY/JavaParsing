@@ -1,4 +1,4 @@
-package xml_parsing.xml.saxParser;
+package labs.xml_parsing.saxParser;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;

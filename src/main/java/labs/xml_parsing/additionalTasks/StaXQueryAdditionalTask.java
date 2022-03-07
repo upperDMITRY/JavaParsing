@@ -1,4 +1,4 @@
-package xml_parsing.xml.additionalTasks;
+package labs.xml_parsing.additionalTasks;
 
 import java.util.Scanner;
 import javax.xml.stream.XMLEventReader;

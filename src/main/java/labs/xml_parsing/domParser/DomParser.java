@@ -1,23 +1,15 @@
-package xml_parsing.xml.XPathParser;
+package labs.xml_parsing.domParser;
 
 import java.io.File;
-import java.io.IOException;
-
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
-import org.xml.sax.SAXException;
 
-public class XPathParser {
+public class DomParser {
 
     public static void main(String[] args) {
 
@@ -26,35 +18,31 @@ public class XPathParser {
             File inputFile = new File("./dataForXMLParsing/inputXml.xml");
             // просим factory создать нам новый истенс объекта DocumentBuilderFactory (factory pattern)
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder;
-
             // создаем объекта на основе сконфигурированной dbFactory
             // который превртит нам XML файл в объект document с которым мы будем работать
-            dBuilder = dbFactory.newDocumentBuilder();
-
-            // парсим нам XML документ java Document
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            // делаем из нашего файла XML -> document object
             Document doc = dBuilder.parse(inputFile);
             // нормализируем ноды в документе, т.е выстраиваем данные поддерева
             // под этим узлами с исключением пустых строк и так далее
             doc.getDocumentElement().normalize();
+            // выводим главный элемент то есть class
+            System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
+            // достаем список элементов <student>
+            NodeList nList = doc.getElementsByTagName("student");
+            System.out.println("----------------------------");
 
-            XPath xPath =  XPathFactory.newInstance().newXPath();
-
-            //достаем все ноды которые содержатся в тегах <student>, в результате все храним в списке
-            String expression = "/class/student";
-            NodeList nodeList = (NodeList) xPath.compile(expression).evaluate(
-                    doc, XPathConstants.NODESET);
-
-            // итерируемся по нодам, достаем каждую из них и кастим их к объекту Element
-            // который помогает нам взаимодействовать с информацией в ноде
-            // и после выводим информацию хранящююся в элементе, достаем значения по названию тэга
-            for (int i = 0; i < nodeList.getLength(); i++) {
-                Node nNode = nodeList.item(i);
+            // итерируемся по списку и выводим данные элементов и их атрибуты
+            for (int temp = 0; temp < nList.getLength(); temp++) {
+                // достаем по одной ноде из списка и обращаемся к ее значениям
+                Node nNode = nList.item(temp);
                 System.out.println("\nCurrent Element :" + nNode.getNodeName());
 
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                    // кастим ноду в эелемент для того чтоб вывести с него данные о студенте
                     Element eElement = (Element) nNode;
-                    System.out.println("Student roll no :" + eElement.getAttribute("rollno"));
+                    System.out.println("Student roll no : "
+                            + eElement.getAttribute("rollno"));
                     System.out.println("First Name : "
                             + eElement
                             .getElementsByTagName("firstname")
@@ -77,13 +65,7 @@ public class XPathParser {
                             .getTextContent());
                 }
             }
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (XPathExpressionException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

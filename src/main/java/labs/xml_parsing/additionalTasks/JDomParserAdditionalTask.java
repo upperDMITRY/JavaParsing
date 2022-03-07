@@ -1,4 +1,4 @@
-package xml_parsing.xml.additionalTasks;
+package labs.xml_parsing.additionalTasks;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;

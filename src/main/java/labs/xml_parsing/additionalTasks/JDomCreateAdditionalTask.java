@@ -1,4 +1,4 @@
-package xml_parsing.xml.additionalTasks;
+package labs.xml_parsing.additionalTasks;
 
 import org.jdom2.Attribute;
 import org.jdom2.Document;
